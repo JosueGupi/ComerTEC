@@ -1,7 +1,8 @@
 const connection = require('./mysql');
 const express = require("express")
 const app = express()
-const userRouter =  require('./routes/Users')
+const AdminAlimentosRouter = require('./routes/AdminAlimentos')
+/*const userRouter =  require('./routes/Users')
 const storeRouter = require('./routes/Stores')
 const subRouter = require('./routes/Subs')
 const shippingRouter = require('./routes/Shipping')
@@ -10,11 +11,13 @@ const AdminEmployeesRouter = require('./routes/AdminEmployees')
 const AdminProductRouter = require('./routes/AdminProducts')
 const saleRouter = require('./routes/Sales')
 const reviewRouter = require('./routes/Reviews')
-const cors = require('cors')
+const cors = require('cors')*/
 
 
 app.use(express.json())
 app.use(cors())
+app.use('/adminAlimentos',AdminAlimentosRouter);
+/*
 app.use('/users',userRouter);
 app.use('/stores',storeRouter);
 app.use('/subs',subRouter);
@@ -23,9 +26,9 @@ app.use('/catalog',catalogRouter);
 app.use('/adminEmployees',AdminEmployeesRouter);
 app.use('/adminProduct',AdminProductRouter);
 app.use('/checkout',saleRouter);
-app.use('/review',reviewRouter);
+app.use('/review',reviewRouter);*/
 
-app.listen(3001,()=>{
+app.listen(process.env.PORT || 3000,()=>{
     console.log('Servers Run')
 });
 
