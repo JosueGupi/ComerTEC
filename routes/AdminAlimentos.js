@@ -5,7 +5,7 @@ app.post('/crearAlimento', function (req, res) {
     // connect to your database
     connection.connect();
     
-        
+    console.log(req)
 
         // create Request object
     
