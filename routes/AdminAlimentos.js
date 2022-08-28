@@ -1,5 +1,5 @@
 const app = require('express').Router()
-const connection = require('./mysql');
+const connection = require('../mysql');
 app.post('/crearAlimento', function (req, res) {
 
     // connect to your database
