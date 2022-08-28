@@ -24,3 +24,4 @@ app.post('/crearAlimento', function (req, res) {
     connection.end();
     // query to the database and get the records
 });
+module.exports = app;
