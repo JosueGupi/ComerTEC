@@ -10,8 +10,8 @@ const catalogRouter = require('./routes/Catalog')
 const AdminEmployeesRouter = require('./routes/AdminEmployees')
 const AdminProductRouter = require('./routes/AdminProducts')
 const saleRouter = require('./routes/Sales')
-const reviewRouter = require('./routes/Reviews')
-const cors = require('cors')*/
+const reviewRouter = require('./routes/Reviews')*/
+const cors = require('cors')
 
 
 app.use(express.json())
