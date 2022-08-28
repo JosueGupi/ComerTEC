@@ -1,7 +1,7 @@
 const app = require('express').Router()
 const connection = require('../mysql');
 app.post('/crearAlimento', function (req, res) {
-console.log(req)
+    console.log(req)
     // connect to your database
     
     
@@ -18,7 +18,7 @@ console.log(req)
     connection.query("INSERT INTO `heroku_7632f15f2b95b48`.`alimento`(`Nombre`,`IdTipoAlimento`,`IdTiempo`,`Cantidad`,`Precio`)VALUES('"+nombre+"',"+tipo+","+tiempo+","+cant+","+precio+");", function (error, results) {
         if (error) throw error;
         
-        res.json(results);
+        res.json(true);
       });
        
     
