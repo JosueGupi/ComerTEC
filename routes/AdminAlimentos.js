@@ -42,7 +42,7 @@ app.post('/actualizarAlimento', function (req, res) {
     const precio = req.body.Precio == undefined ? "`Precio`" : req.body.Precio;
     const tipo = req.body.TipoAlimento == undefined ? "`IdTipoAlimento`" : req.body.TipoAlimento;
     const query = "UPDATE `heroku_7632f15f2b95b48`.`alimento` SET `Nombre` = "+nombre+",`IdTipoAlimento` = "+tipo+",`IdTiempo` = "+tiempo+",`Cantidad` = "+cant+",`Precio` = "+precio+" WHERE `idAlimento` ="+IdComida;
-    
+    console.log(query);
     connection.query(query, function (error, results) {
         if (error) throw error;
         
