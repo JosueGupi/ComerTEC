@@ -44,7 +44,7 @@ app.post('/actualizarAlimento', function (req, res) {
     const prueba = req.body.Prueba
     console.log(req.body)
     
-    connection.query("UPDATE `heroku_7632f15f2b95b48`.`alimento` SET `Nombre` = "+nombre+",`IdTipoAlimento` = "+tipo+",`IdTiempo` = "+tiempo+",`Cantidad` = "+cant+",`Precio` = "+precio+" WHERE `idAlimento` ="+IdComida, function (error, results) {
+    connection.query("UPDATE `heroku_7632f15f2b95b48`.`alimento` SET `Nombre` = '"+nombre+"',`IdTipoAlimento` = "+tipo+",`IdTiempo` = "+tiempo+",`Cantidad` = "+cant+",`Precio` = "+precio+" WHERE `idAlimento` ="+IdComida, function (error, results) {
         if (error) throw error;
         
         res.json(true);
