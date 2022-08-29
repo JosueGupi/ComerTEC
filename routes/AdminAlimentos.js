@@ -42,7 +42,7 @@ app.post('/actualizarAlimento', function (req, res) {
     const precio = req.body.Precio
     const tipo = req.body.TipoAlimento
     const prueba = req.body.Prueba
-    console.log(req.body)
+    console.log(req.body.Prueba == undefined)
     
     connection.query("UPDATE `heroku_7632f15f2b95b48`.`alimento` SET `Nombre` = '"+nombre+"',`IdTipoAlimento` = "+tipo+",`IdTiempo` = "+tiempo+",`Cantidad` = "+cant+",`Precio` = "+precio+" WHERE `idAlimento` ="+IdComida, function (error, results) {
         if (error) throw error;
