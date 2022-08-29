@@ -51,6 +51,6 @@ app.post('/actualizarAlimento', function (req, res) {
       });
        
     
-    // query to the database and get the records
+    // query to the database and get the record
 });
 module.exports = app;
