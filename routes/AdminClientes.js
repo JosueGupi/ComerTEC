@@ -33,4 +33,15 @@ app.post('/eliminarCliente', function (req, res) {
     
     // query to the database and get the records
 });
+app.get('/obtenerHistorial', function (req, res) {
+  
+  connection.query("SELECT pedido.idPedido, CONCAT(personas.Nombre,' ',PrimerApellido,' ',SegundoApellido) as Cliente, alimento.Nombre AS Alimento, pedidoxalimento.cantidad, pedido.Fecha FROM pedido INNER JOIN personas ON pedido.idPersona = personas.idPersona INNER JOIN pedidoxalimento ON pedidoxalimento.IdPedido = pedido.idPedido INNER JOIN alimento ON alimento.idAlimento = pedidoxalimento.IdAlimento;  ", function (error, results) {
+      if (error) {res.json(error);throw error};
+      
+      res.json(results);
+    });
+     
+  
+  // query to the database and get the records
+});
 module.exports = app;
