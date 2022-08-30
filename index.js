@@ -2,6 +2,7 @@ const connection = require('./mysql');
 const express = require("express")
 const app = express()
 const AdminAlimentosRouter = require('./routes/AdminAlimentos')
+const AdminClientesRouter = require('./routes/AdminClientes')
 /*const userRouter =  require('./routes/Users')
 const storeRouter = require('./routes/Stores')
 const subRouter = require('./routes/Subs')
@@ -17,6 +18,7 @@ const cors = require('cors')
 app.use(express.json())
 app.use(cors())
 app.use('/adminAlimentos',AdminAlimentosRouter);
+app.use('/adminClientes',AdminClientesRouter);
 /*
 app.use('/users',userRouter);
 app.use('/stores',storeRouter);
