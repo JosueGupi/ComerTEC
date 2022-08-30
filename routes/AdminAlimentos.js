@@ -9,8 +9,7 @@ app.post('/crearAlimento', function (req, res) {
     const tipo = req.body.TipoAlimento
     
     connection.query("INSERT INTO `heroku_7632f15f2b95b48`.`alimento`(`Nombre`,`IdTipoAlimento`,`IdTiempo`,`Cantidad`,`Precio`)VALUES('"+nombre+"',"+tipo+","+tiempo+","+cant+","+precio+");", function (error, results) {
-        if (error) throw error;
-        
+        if (error) {res.json(error);throw error};        
         res.json(true);
       });
        
@@ -25,8 +24,7 @@ app.post('/eliminarAlimento', function (req, res) {
     
     
     connection.query("DELETE FROM `heroku_7632f15f2b95b48`.`alimento`WHERE `alimento`.`idAlimento` = "+IdComida+";", function (error, results) {
-        if (error) throw error;
-        
+        if (error) {res.json(error);throw error};        
         res.json(true);
       });
        
@@ -44,8 +42,7 @@ app.post('/actualizarAlimento', function (req, res) {
     const query = "UPDATE `heroku_7632f15f2b95b48`.`alimento` SET `Nombre` = "+nombre+",`IdTipoAlimento` = "+tipo+",`IdTiempo` = "+tiempo+",`Cantidad` = "+cant+",`Precio` = "+precio+" WHERE `idAlimento` ="+IdComida;
     console.log(query);
     connection.query(query, function (error, results) {
-        if (error) throw error;
-        
+        if (error) {res.json(error);throw error};        
         res.json(true);
       });
        
