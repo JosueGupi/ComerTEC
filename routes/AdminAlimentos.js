@@ -49,4 +49,15 @@ app.post('/actualizarAlimento', function (req, res) {
     
     // query to the dataase and get the record
 });
+app.get('/obtenerAlimentos', function (req, res) {
+  
+  connection.query("SELECT `alimento`.`idAlimento`,`alimento`.`Nombre`FROM `heroku_7632f15f2b95b48`.`alimento`;", function (error, results) {
+      if (error) {res.json(error);throw error};
+      
+      res.json(results);
+    });
+     
+  
+  // query to the database and get the records
+});
 module.exports = app;
