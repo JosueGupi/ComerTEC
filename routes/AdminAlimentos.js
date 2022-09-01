@@ -34,11 +34,11 @@ app.post('/eliminarAlimento', function (req, res) {
 app.post('/actualizarAlimento', function (req, res) {
     
     const IdComida = req.body.IdComida
-    const nombre = req.body.Nombre == undefined ? "`Nombre`" : "'"+req.body.Nombre+"'";
-    const cant = req.body.Cantidad == undefined ? "`Cantidad`" : req.body.Cantidad;
-    const tiempo = req.body.TiempoAlimento == undefined ? "`IdTiempo`" : req.body.TiempoAlimento;
-    const precio = req.body.Precio == undefined ? "`Precio`" : req.body.Precio;
-    const tipo = req.body.TipoAlimento == undefined ? "`IdTipoAlimento`" : req.body.TipoAlimento;
+    const nombre = req.body.Nombre == '' ? "`Nombre`" : "'"+req.body.Nombre+"'";
+    const cant = req.body.Cantidad == '' ? "`Cantidad`" : req.body.Cantidad;
+    const tiempo = req.body.TiempoAlimento == '' ? "`IdTiempo`" : req.body.TiempoAlimento;
+    const precio = req.body.Precio == '' ? "`Precio`" : req.body.Precio;
+    const tipo = req.body.TipoAlimento == '' ? "`IdTipoAlimento`" : req.body.TipoAlimento;
     const query = "UPDATE `heroku_7632f15f2b95b48`.`alimento` SET `Nombre` = "+nombre+",`IdTipoAlimento` = "+tipo+",`IdTiempo` = "+tiempo+",`Cantidad` = "+cant+",`Precio` = "+precio+" WHERE `idAlimento` ="+IdComida;
     console.log(query);
     connection.query(query, function (error, results) {
@@ -59,5 +59,22 @@ app.get('/obtenerAlimentos', function (req, res) {
      
   
   // query to the database and get the records
+});
+
+app.post('/modificarTiempo', function (req, res) {
+    
+  const IdComida = req.body.IdAlimento;
+  
+  const tiempo = req.body.TiempoAlimento;
+  
+  const query = "UPDATE `heroku_7632f15f2b95b48`.`alimento` SET `IdTiempo` = "+tiempo+" WHERE `idAlimento` ="+IdComida;
+  console.log(query);
+  connection.query(query, function (error, results) {
+      if (error) {res.json(error);throw error};        
+      res.json(true);
+    });
+     
+  
+  // query to the dataase and get the record
 });
 module.exports = app;
