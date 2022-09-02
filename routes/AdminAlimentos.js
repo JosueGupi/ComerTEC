@@ -31,6 +31,7 @@ app.post('/eliminarAlimento', function (req, res) {
     
     // query to the database and get the records
 });
+
 app.post('/actualizarAlimento', function (req, res) {
     
     const IdComida = req.body.IdComida
