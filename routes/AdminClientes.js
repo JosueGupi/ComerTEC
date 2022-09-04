@@ -35,7 +35,7 @@ app.post('/eliminarCliente', function (req, res) {
 });
 app.get('/obtenerHistorial', function (req, res) {
   
-  connection.query("SELECT pedido.idPedido,personas.Carnet,personas.Correo, CONCAT(personas.Nombre,' ',PrimerApellido,' ',SegundoApellido) as Cliente, alimento.Nombre AS Alimento, pedidoxalimento.cantidad, pedido.Fecha FROM pedido INNER JOIN personas ON pedido.idPersona = personas.idPersona INNER JOIN pedidoxalimento ON pedidoxalimento.IdPedido = pedido.idPedido INNER JOIN alimento ON alimento.idAlimento = pedidoxalimento.IdAlimento;  ", function (error, results) {
+  connection.query("SELECT CAST(pedido.idPedido as CHAR) as idPedido,personas.Carnet,personas.Correo, CONCAT(personas.Nombre,' ',PrimerApellido,' ',SegundoApellido) as Cliente, alimento.Nombre AS Alimento, pedidoxalimento.cantidad, pedido.Fecha FROM pedido INNER JOIN personas ON pedido.idPersona = personas.idPersona INNER JOIN pedidoxalimento ON pedidoxalimento.IdPedido = pedido.idPedido INNER JOIN alimento ON alimento.idAlimento = pedidoxalimento.IdAlimento;  ", function (error, results) {
       if (error) {res.json(error);throw error};
       
       res.json(results);
