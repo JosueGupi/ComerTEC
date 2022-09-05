@@ -3,6 +3,7 @@ const express = require("express")
 const app = express()
 const AdminAlimentosRouter = require('./routes/AdminAlimentos')
 const AdminClientesRouter = require('./routes/AdminClientes')
+const ClientRouter = require('./routes/Client')
 /*const userRouter =  require('./routes/Users')
 const storeRouter = require('./routes/Stores')
 const subRouter = require('./routes/Subs')
@@ -19,6 +20,7 @@ app.use(express.json())
 app.use(cors())
 app.use('/adminAlimentos',AdminAlimentosRouter);
 app.use('/adminClientes',AdminClientesRouter);
+app.use('/client',ClientRouter);
 /*
 app.use('/users',userRouter);
 app.use('/stores',storeRouter);
