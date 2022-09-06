@@ -46,7 +46,7 @@ app.post('/eliminarAlimento', function (req, res) {
 
 app.post('/actualizarAlimento', function (req, res) {
     
-    const IdComida = req.body.IdComida
+    const IdComida = req.body.IdComida == '' ? "undefined" : req.body.IdComida;
     const nombre = req.body.Nombre == '' ? "`Nombre`" : "'"+req.body.Nombre+"'";
     const cant = req.body.Cantidad == '' ? "`Cantidad`" : req.body.Cantidad;
     const tiempo = req.body.TiempoAlimento == '' ? "`IdTiempo`" : req.body.TiempoAlimento;
