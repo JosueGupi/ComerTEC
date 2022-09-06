@@ -2,16 +2,16 @@ const app = require('express').Router()
 const connection = require('../mysql');
 app.post('/actualizarCliente', function (req, res) {
     
-    const nombre = req.body.Nombre
-    const apellido1 = req.body.Apellido1
-    const apellido2 = req.body.Apellido2
-    const carnet = req.body.Carnet
-    const cedula = req.body.Cedula
-    const fecha = req.body.Fecha
-    const correo = req.body.Correo
-    const password = req.body.Password
+    const nombre = req.body.Nombre  == '' ? "`Nombre`" : "'"+req.body.Nombre+"'";
+    const apellido1 = req.body.Apellido1 == '' ? "`PrimerApellido`" : "'"+req.body.Apellido1+"'";
+    const apellido2 = req.body.Apellido2 == '' ? "`SegundoApellido`" : "'"+req.body.Apellido2+"'";
+    const carnet = req.body.Carnet == '' ? "`Carnet`" : "'"+req.body.Carnet+"'";
+    const cedula = req.body.Cedula == '' ? "undefined" : "'"+req.body.Cedula+"'";
+    const fecha = req.body.Fecha == '' ? "`FechaNacimiento`" : "'"+req.body.Fecha+"'";
+    const correo = req.body.Correo == '' ? "`Correo`" : "'"+req.body.Correo+"'";
+    const password = req.body.Password == '' ? "`Password`" : "'"+req.body.Password+"'";
     
-    const query = "UPDATE `heroku_7632f15f2b95b48`.`personas` SET `Nombre` = '"+nombre+"', `Carnet` ='"+carnet+"', `PrimerApellido` = '"+apellido1+"',`SegundoApellido` = '"+apellido2+"',`FechaNacimiento` = '"+fecha+"',`Correo` = '"+correo+"', `Password` = '"+password+"' WHERE `Cedula` = "+cedula+";"
+    const query = "UPDATE `heroku_7632f15f2b95b48`.`personas` SET `Nombre` = "+nombre+", `Carnet` ="+carnet+", `PrimerApellido` = "+apellido1+",`SegundoApellido` = "+apellido2+",`FechaNacimiento` = "+fecha+",`Correo` = "+correo+", `Password` = "+password+" WHERE `Cedula` = "+cedula+";"
     if(query.includes("undefined")){
       res.json(false);
     }else{
@@ -28,9 +28,9 @@ app.post('/actualizarCliente', function (req, res) {
 });
 app.post('/eliminarCliente', function (req, res) {
     
-    const idCliente = req.body.IdCliente
+    const idCliente = req.body.IdCliente == '' ? "undefined" : "'"+req.body.IdCliente+"'";
     
-    const query = "DELETE FROM `heroku_7632f15f2b95b48`.`personas` WHERE `Cedula` = '"+idCliente+"';"
+    const query = "DELETE FROM `heroku_7632f15f2b95b48`.`personas` WHERE `Cedula` = "+idCliente+";"
 
     if(query.includes("undefined")){
       res.json(false);

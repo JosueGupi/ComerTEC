@@ -2,11 +2,11 @@ const app = require('express').Router()
 const connection = require('../mysql');
 app.post('/crearAlimento', function (req, res) {
     
-    const nombre = req.body.Nombre
-    const cant = req.body.Cantidad
-    const tiempo = req.body.TiempoAlimento
-    const precio = req.body.Precio
-    const tipo = req.body.TipoAlimento
+    const nombre = req.body.Nombre == '' ? "undefined" : req.body.Nombre;
+    const cant = req.body.Cantidad == '' ? "undefined" : req.body.Cantidad;
+    const tiempo = req.body.TiempoAlimento == '' ? "undefined" : req.body.TiempoAlimento;
+    const precio = req.body.Precio == '' ? "undefined" : req.body.Precio;
+    const tipo = req.body.TipoAlimento == '' ? "undefined" : req.body.TipoAlimento;
     
     const query = "INSERT INTO `heroku_7632f15f2b95b48`.`alimento`(`Nombre`,`IdTipoAlimento`,`IdTiempo`,`Cantidad`,`Precio`)VALUES('"+nombre+"',"+tipo+","+tiempo+","+cant+","+precio+");";
 
@@ -27,7 +27,7 @@ app.post('/eliminarAlimento', function (req, res) {
     
     
     
-    const IdComida = req.body.IdComida
+    const IdComida = req.body.IdComida == '' ? "undefined" : req.body.IdComida;
     
     const query = "DELETE FROM `heroku_7632f15f2b95b48`.`alimento`WHERE `alimento`.`idAlimento` = "+IdComida+";";
     if(query.includes("undefined")){
@@ -80,9 +80,9 @@ app.get('/obtenerAlimentos', function (req, res) {
 
 app.post('/modificarTiempo', function (req, res) {
     
-  const IdComida = req.body.IdAlimento;
+  const IdComida = req.body.IdAlimento == '' ? "undefined" : req.body.IdAlimento;
   
-  const tiempo = req.body.TiempoAlimento;
+  const tiempo = req.body.TiempoAlimento == '' ? "undefined" : req.body.IdAlimento;
   
   const query = "UPDATE `heroku_7632f15f2b95b48`.`alimento` SET `IdTiempo` = "+tiempo+" WHERE `idAlimento` ="+IdComida;
   if(query.includes("undefined")){

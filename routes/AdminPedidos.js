@@ -5,7 +5,7 @@ app.post('/eliminarPedido', function (req, res) {
     
     
     
-  const IdComida = req.body.IdPedido
+  const IdComida = req.body.IdPedido == '' ? "undefined" : req.body.IdPedido;
   const query ="DELETE FROM `heroku_7632f15f2b95b48`.`pedido`WHERE `pedido`.`idPedido` = "+IdComida+";";
   
   if(query.includes("undefined")){
@@ -24,11 +24,11 @@ app.post('/eliminarPedido', function (req, res) {
 
 app.post('/actualizarPedido', function (req, res) {
     
-    const idPedido = req.body.IdPedido;
-    const idPersona = req.body.idPersona;
-    const fecha = req.body.Fecha;
+    const idPedido = req.body.IdPedido == '' ? "undefined" : req.body.IdPedido;
+    const idPersona = req.body.idPersona == '' ? "undefined" : req.body.idPersona;
+    const fecha = req.body.Fecha == '' ? "undefined" : req.body.Fecha;
 
-    const query = "UPDATE `heroku_7632f15f2b95b48`.`pedido` SET `Fecha` = "+fecha+", `idPersona` = "+idPersona+" WHERE `IdPedido` ="+IdPedido+";";
+    const query = "UPDATE `heroku_7632f15f2b95b48`.`pedido` SET `Fecha` = "+fecha+", `idPersona` = "+idPersona+" WHERE `IdPedido` ="+idPedido+";";
     
     if(query.includes("undefined")){
       res.json(false);
