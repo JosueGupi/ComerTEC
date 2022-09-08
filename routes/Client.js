@@ -1,10 +1,9 @@
 const app = require('express').Router();
 const connection = require('../mysql');
 
-app.get('/login', function (req, res) {
+app.post('/login', function (req, res) {
   const password = req.body.Password;
   const user = req.body.User;
-  console.log("Data:", password, user);
   connection.query(
     "SELECT `personas`.`COUNT(idPersona)`FROM `heroku_7632f15f2b95b48`.`personas` WHERE `Password`=" +
       password +
