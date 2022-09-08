@@ -11,13 +11,13 @@ app.post('/login', function (req, res) {
       user +
       "' ;",
     function (error, results) {
-        console.log(results)
+      console.log(results)
       if (error) {
         res.json(error);
         throw error;
       }
 
-      res.json(true);
+      res.json(results);
     }
   );
 });
