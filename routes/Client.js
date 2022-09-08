@@ -5,11 +5,11 @@ app.post('/login', function (req, res) {
   const password = req.body.Password;
   const user = req.body.User;
   connection.query(
-    "SELECT `idPersona` FROM `heroku_7632f15f2b95b48`.`personas` WHERE `Password`=" +
+    "SELECT `idPersona` FROM `heroku_7632f15f2b95b48`.`personas` WHERE `Password`= '" +
       password +
-      " AND `Correo`= " +
+      "' AND `Correo`= '" +
       user +
-      " ;",
+      "' ;",
     function (error, results) {
         console.log(results)
       if (error) {
