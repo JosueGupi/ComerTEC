@@ -114,8 +114,8 @@ app.post('/deleteShoppingCart', function (req, res) {
 });
 
 app.get('/getShoppingCart', function(req, res) {
-  const idPersona = req.body.idPersona;
-  console.log('back: ',req)
+  const idPersona = req[0].idPersona;
+  console.log('back: ',idPersona)
   connection.query(
     "SELECT `carrito`.`idCarrito`,`carrito`.`idAlimento`,`carrito`.`cantidad`,`carrito`.`estado` " +
     "FROM `heroku_7632f15f2b95b48`.`carrito` " +
