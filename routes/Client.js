@@ -57,7 +57,6 @@ app.post('/create', function (req, res) {
 });
 
 app.get('/catalog', function (req, res) {   
-  const studentCard = req.body.StudentCard;
   connection.query(
     "SELECT `alimento`.`idAlimento`,`alimento`.`Nombre` AS Alimento, `tipoalimento`.`Nombre` AS Tipo,"+ 
     "`tiempos`.`NombreTiempo`, `alimento`.`Cantidad`, `alimento`.`Precio`"+ 
@@ -78,14 +77,12 @@ app.get('/catalog', function (req, res) {
   ); 
 });
 
-/*INSERT INTO `heroku_7632f15f2b95b48`.`carrito`(`idPersona`,`idAlimento`,`cantidad`)
-VALUES (14,4,1);*/
 app.post('/insertShoppingCart', function (req, res) {   
   const idPersona = req.body.idPersona;
   const idAlimento = req.body.idAlimento;
   const cantidad = req.body.cantidad;
   connection.query(
-    "INSERT INTO `heroku_7632f15f2b95b48`.`carrito`(`idPersona`,`idAlimento`,`cantidad`) " +
+    "INSERT INTO `heroku_7632f15f2b95b48`.`carrito`(`idPersona`,`idAlimento`,`cantidad`,`estado`) " +
     "VALUES (" + idPersona + "," + idAlimento + "," + cantidad + ", 1);", // estado del carrito: 1-no comprado 0-comprado
     function (error, results) {
         console.log(results)
@@ -116,6 +113,21 @@ app.post('/deleteShoppingCart', function (req, res) {
   ); 
 });
 
+app.get('/getShoppingCart', function(req, res) {
+  const idPersona = req.body.idPersona;
+  connection.query(
+    "SELECT `idCarrito`,`idAlimento`,`cantidad`,`estado` " +
+    "FROM `heroku_7632f15f2b95b48`.`carrito` " +
+    "WHERE `idPersona` = " + idUser + " AND `estado` = 1;",
+    function (error, results) {
+      if (error) {
+        res.json(error);
+        throw error;
+      }
 
+      res.json(results);
+    }
+  ); 
+});
 
 module.exports = app;
