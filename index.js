@@ -4,6 +4,7 @@ const app = express()
 const AdminAlimentosRouter = require('./routes/AdminAlimentos')
 const AdminClientesRouter = require('./routes/AdminClientes')
 const ClientRouter = require('./routes/Client')
+const AdminPedidosRouter = require('./routes/AdminPedidos')
 /*const userRouter =  require('./routes/Users')
 const storeRouter = require('./routes/Stores')
 const subRouter = require('./routes/Subs')
@@ -21,6 +22,7 @@ app.use(cors())
 app.use('/adminAlimentos',AdminAlimentosRouter);
 app.use('/adminClientes',AdminClientesRouter);
 app.use('/client',ClientRouter);
+app.use('/adminPedidos',AdminPedidosRouter);
 /*
 app.use('/users',userRouter);
 app.use('/stores',storeRouter);
