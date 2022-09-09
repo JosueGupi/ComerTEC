@@ -116,9 +116,9 @@ app.post('/deleteShoppingCart', function (req, res) {
 app.get('/getShoppingCart', function(req, res) {
   const idPersona = req.body.idPersona;
   connection.query(
-    "SELECT `idCarrito`,`idAlimento`,`cantidad`,`estado` " +
+    "SELECT `carrito`.`idCarrito`,`carrito`.`idAlimento`,`carrito`.`cantidad`,`carrito`.`estado` " +
     "FROM `heroku_7632f15f2b95b48`.`carrito` " +
-    "WHERE `idPersona` = " + idUser + " AND `estado` = 1;",
+    "WHERE `idPersona` = " + idPersona + " AND `estado` = 1;",
     function (error, results) {
       if (error) {
         res.json(error);
