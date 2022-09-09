@@ -30,7 +30,7 @@ app.post('/eliminarCliente', function (req, res) {
     
     const idCliente = req.body.IdCliente == '' ? "undefined" : "'"+req.body.IdCliente+"'";
     
-    const query = "DELETE FROM `heroku_7632f15f2b95b48`.`personas` WHERE `Cedula` = "+idCliente+";"
+    const query = "CALL `heroku_7632f15f2b95b48`.`SP_DeleteUser`("+idCliente+");"
 
     if(query.includes("undefined")){
       res.json(false);

@@ -6,7 +6,7 @@ app.post('/eliminarPedido', function (req, res) {
     
     
   const IdComida = req.body.IdPedido == '' ? "undefined" : req.body.IdPedido;
-  const query ="DELETE FROM `heroku_7632f15f2b95b48`.`pedido`WHERE `pedido`.`idPedido` = "+IdComida+";";
+  const query ="CALL `heroku_7632f15f2b95b48`.`SP_DeletePedido`("+IdComida+");"
   
   if(query.includes("undefined")){
     res.json(false);
