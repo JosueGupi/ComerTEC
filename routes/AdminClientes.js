@@ -43,7 +43,7 @@ app.post('/eliminarCliente', function (req, res) {
     }
        
     
-    // query to the database and get the records
+    // query to the datbase and get the records
 });
 app.get('/obtenerHistorial', function (req, res) {
   
