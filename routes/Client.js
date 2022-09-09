@@ -114,7 +114,7 @@ app.post('/deleteShoppingCart', function (req, res) {
 });
 
 app.get('/getShoppingCart', function(req, res) {
-  const idPersona = req[0].idPersona;
+  const idPersona = req.body.idPersona;
   console.log('back: ',idPersona)
   connection.query(
     "SELECT `carrito`.`idCarrito`,`carrito`.`idAlimento`,`carrito`.`cantidad`,`carrito`.`estado` " +
