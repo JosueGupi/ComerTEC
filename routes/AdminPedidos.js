@@ -19,7 +19,7 @@ app.post('/eliminarPedido', function (req, res) {
   }
      
   
-  // query to the database andget the records
+  // query to the database and get the records
 });
 
 app.post('/actualizarPedido', function (req, res) {
