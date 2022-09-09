@@ -3,11 +3,11 @@ const connection = require('../mysql');
 
 app.post('/eliminarPedido', function (req, res) {
     
-    
+  console.log('Llego hasta aca antes');
     
   const IdComida = req.body.IdPedido == '' ? "undefined" : req.body.IdPedido;
   const query ="CALL `heroku_7632f15f2b95b48`.`SP_DeletePedido`("+IdComida+");"
-  
+  console.log('Llego hasta aca');
   if(query.includes("undefined")){
     res.json(false);
   }else{
