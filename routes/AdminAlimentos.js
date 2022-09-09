@@ -29,7 +29,7 @@ app.post('/eliminarAlimento', function (req, res) {
     
     const IdComida = req.body.IdComida == '' ? "undefined" : req.body.IdComida;
     
-    const query = "DELETE FROM `heroku_7632f15f2b95b48`.`alimento`WHERE `alimento`.`idAlimento` = "+IdComida+";";
+    const query = "CALL `heroku_7632f15f2b95b48`.`SP_DeleteAlimento`("+IdComida+");";
     if(query.includes("undefined")){
       res.json(false);
     }else{
