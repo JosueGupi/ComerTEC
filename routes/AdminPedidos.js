@@ -35,7 +35,7 @@ app.post('/alimentosNuevos', function (req, res) {
       connection.query(query, function (error, results) {
         if (error) {res.json(error);throw error};
         
-        res.json(true);
+        res.json(results);
       });
     }
        
@@ -55,7 +55,7 @@ app.post('/alimentosAgregados', function (req, res) {
     connection.query(query, function (error, results) {
       if (error) {res.json(error);throw error};
       
-      res.json(true);
+      res.json(results);
     });
   }
      
