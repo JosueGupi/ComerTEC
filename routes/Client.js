@@ -101,7 +101,7 @@ app.post('/deleteShoppingCart', function (req, res) {
   const idAlimento = req.body.idAlimento;
   connection.query(
     "DELETE FROM `heroku_7632f15f2b95b48`.`carrito` " +
-    "WHERE idPersona=" + idPersona + " AND idAlimento="+ idAlimento +" );",
+    "WHERE (idPersona=" + idPersona + " AND idAlimento="+ idAlimento +" );",
     function (error, results) {
         console.log(results)
       if (error) {
