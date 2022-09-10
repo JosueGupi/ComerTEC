@@ -97,10 +97,11 @@ app.post('/insertShoppingCart', function (req, res) {
 });
 
 app.post('/deleteShoppingCart', function (req, res) {   
-  const idCarrito = req.body.idCarrito;
+  const idPersona = req.body.idPersona;
+  const idAlimento = req.body.idAlimento;
   connection.query(
-    "DELETE FROM `heroku_7632f15f2b95b48`.`carrito`" +
-    "WHERE idCarrito=" + idCarrito + ");",
+    "DELETE FROM `heroku_7632f15f2b95b48`.`carrito` " +
+    "WHERE idPersona=" + idPersona + " AND idAlimento="+ idAlimento +" );",
     function (error, results) {
         console.log(results)
       if (error) {
