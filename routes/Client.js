@@ -117,9 +117,12 @@ app.post('/getShoppingCart', function(req, res) {
   const idPersona = req.body.idPersona;
   console.log('back: ',idPersona)
   connection.query(
-    "SELECT `carrito`.`idCarrito`,`carrito`.`idAlimento`,`carrito`.`cantidad`,`carrito`.`estado` " +
+    "SELECT SUM(`carrito`.`cantidad`) AS Cantidad,`carrito`.`idAlimento`,`alimento`.`Nombre`, `alimento`.`Precio`" +
     "FROM `heroku_7632f15f2b95b48`.`carrito` " +
-    "WHERE `idPersona` = " + idPersona + " AND `estado` = 1;",
+    "INNER JOIN `heroku_7632f15f2b95b48`.`alimento` " +
+    "  ON `alimento`.`idAlimento` = `carrito`.`idAlimento` " +
+    "WHERE `idPersona` = " + idPersona + " AND `estado` = 1 " +
+    "GROUP BY `idAlimento`,`Nombre`;",
     function (error, results) {
       if (error) {
         res.json(error);
