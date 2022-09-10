@@ -24,11 +24,11 @@ app.post('/eliminarPedido', function (req, res) {
 
 app.post('/alimentosNuevos', function (req, res) {
     
-    const idPedido = req.body.IdPedido == '' ? "undefined" : req.body.IdPedido;
+    const idPedido = req.body.IdPedido == '' ? "undefined" : req.body.idPedido;
     
 
     const query = "SELECT alimento.idAlimento ,alimento.Nombre From alimento WHERE NOT EXISTS (SELECT * FROM pedidoxalimento WHERE pedidoxalimento.IdPedido = "+idPedido+" and pedidoxalimento.idalimento = alimento.idalimento);";
-    
+    console.log(query);
     if(query.includes("undefined")){
       res.json(false);
     }else{
@@ -44,11 +44,11 @@ app.post('/alimentosNuevos', function (req, res) {
 });
 app.post('/alimentosAgregados', function (req, res) {
     
-  const idPedido = req.body.IdPedido == '' ? "undefined" : req.body.IdPedido;
+  const idPedido = req.body.IdPedido == '' ? "undefined" : req.body.idPedido;
   
 
   const query = "SELECT alimento.idAlimento ,alimento.Nombre From alimento WHERE EXISTS (SELECT * FROM pedidoxalimento WHERE pedidoxalimento.IdPedido = "+idPedido+" and pedidoxalimento.idalimento = alimento.idalimento);";
-  
+  console.log(query);
   if(query.includes("undefined")){
     res.json(false);
   }else{
