@@ -174,11 +174,11 @@ app.post('/generateOrder', function (req, res) {
     async function (error, results) {
       const email = 'montoyageisel@gmail.com' //results[0].Email
       console.log('generateOrder', results[0])
-      var mensaje = '';
+      
       for (var i in results[0]){
-        mensaje += i.alimento + "\n";
+        console.log(i)
       }
-      console.log(mensaje);
+      
 
       let img = await QRCode.toDataURL('data invoice untuk di kirim melalui email');
       var nodemailer = require('nodemailer');
