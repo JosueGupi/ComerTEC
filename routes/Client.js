@@ -8,10 +8,10 @@ app.post('/login', function (req, res) {
   const user = req.body.User;
   connection.query(
     "SELECT `idPersona`,`Admin` FROM `heroku_7632f15f2b95b48`.`personas` WHERE `Password`= '" +
-      password +
-      "' AND `Correo`= '" +
-      user +
-      "' ;",
+    password +
+    "' AND `Correo`= '" +
+    user +
+    "' ;",
     function (error, results) {
       console.log(results)
       if (error) {
@@ -24,7 +24,7 @@ app.post('/login', function (req, res) {
   );
 });
 
-app.post('/create', function (req, res) {      
+app.post('/create', function (req, res) {
   const name = req.body.Name;
   const studentCard = req.body.StudentCard;
   const id = req.body.Id;
@@ -35,49 +35,49 @@ app.post('/create', function (req, res) {
   const tecPassword = req.body.TecPassword;
   connection.query(
     "INSERT INTO `heroku_7632f15f2b95b48`.`personas`(`Nombre`, `Carnet`, `Cedula`, `PrimerApellido`, `SegundoApellido`, " +
-      "`FechaNacimiento`, `Correo`, `Password`, `Admin`) VALUES ('" +
-      name + "', " +
-      studentCard + ", " +
-      id + ", '" +
-      firstSurname + "', '" +
-      secondSurname + "', '" +
-      dateBirth + "', '" +
-      email + "', '" +
-      tecPassword + "', " +
-      0 +
-      " );",
+    "`FechaNacimiento`, `Correo`, `Password`, `Admin`) VALUES ('" +
+    name + "', " +
+    studentCard + ", " +
+    id + ", '" +
+    firstSurname + "', '" +
+    secondSurname + "', '" +
+    dateBirth + "', '" +
+    email + "', '" +
+    tecPassword + "', " +
+    0 +
+    " );",
     function (error, results) {
-        console.log(results)
-        var nodemailer = require('nodemailer');
-        const transporter = nodemailer.createTransport({
-          host: 'smtp.ethereal.email',
-          port: 587,
-          secure: false,
-          auth: {
-              user: 'tristian58@ethereal.email',
-              pass: 'cgfKAmnF7c9541FmMP'
-          }
-        });
-        console.log('sending an email..')  
- 
-        var mailOptions = {
-          from: "ComerTEC",
-          to: email,
-          subject: "Bienvenid@",
-          text: "¡Se ha creado una cuenta en ComerTec con los siguientes datos!" +
+      console.log(results)
+      var nodemailer = require('nodemailer');
+      const transporter = nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        secure: false,
+        auth: {
+          user: 'tristian58@ethereal.email',
+          pass: 'cgfKAmnF7c9541FmMP'
+        }
+      });
+      console.log('sending an email..')
+
+      var mailOptions = {
+        from: "ComerTEC",
+        to: email,
+        subject: "Bienvenid@",
+        text: "¡Se ha creado una cuenta en ComerTec con los siguientes datos!" +
           "\n\nNombre: " + name + " \nPrimer Apellido: " + firstSurname +
           "\nSegundo Apellido: " + secondSurname + "\nFecha de Nacimiento: " +
           dateBirth + "\nCédula: " + id + "\nCarnet: " + studentCard +
           "\n\nGracias por escogernos!!"
+      }
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error.message)
         }
-        transporter.sendMail(mailOptions,(error,info)=>{
-          if (error){
-            console.log(error.message)
-          }
-          else{
-            console.log('WORKS!!!')
-          }
-        });
+        else {
+          console.log('WORKS!!!')
+        }
+      });
       if (error) {
         res.json(error);
         throw error;
@@ -85,17 +85,17 @@ app.post('/create', function (req, res) {
 
       res.json(true);
     }
-  ); 
+  );
 });
 
-app.get('/catalog', function (req, res) {   
+app.get('/catalog', function (req, res) {
   connection.query(
-    "SELECT `alimento`.`idAlimento`,`alimento`.`Nombre` AS Alimento, `tipoalimento`.`Nombre` AS Tipo,"+ 
-    "`tiempos`.`NombreTiempo`, `alimento`.`Cantidad`, `alimento`.`Precio`"+ 
-    "FROM `heroku_7632f15f2b95b48`.`alimento`"+ 
-    "INNER JOIN `heroku_7632f15f2b95b48`.`tipoalimento`"+ 
-    "  ON `alimento`.`IdTipoAlimento` = `tipoalimento`.`idtipoalimento`"+ 
-    "INNER JOIN `heroku_7632f15f2b95b48`.`tiempos`"+ 
+    "SELECT `alimento`.`idAlimento`,`alimento`.`Nombre` AS Alimento, `tipoalimento`.`Nombre` AS Tipo," +
+    "`tiempos`.`NombreTiempo`, `alimento`.`Cantidad`, `alimento`.`Precio`" +
+    "FROM `heroku_7632f15f2b95b48`.`alimento`" +
+    "INNER JOIN `heroku_7632f15f2b95b48`.`tipoalimento`" +
+    "  ON `alimento`.`IdTipoAlimento` = `tipoalimento`.`idtipoalimento`" +
+    "INNER JOIN `heroku_7632f15f2b95b48`.`tiempos`" +
     "  ON `alimento`.`IdTiempo` = `tiempos`.`idTiempos`;",
     function (error, results) {
       console.log(results)
@@ -106,10 +106,10 @@ app.get('/catalog', function (req, res) {
 
       res.json(results);
     }
-  ); 
+  );
 });
 
-app.post('/insertShoppingCart', function (req, res) {   
+app.post('/insertShoppingCart', function (req, res) {
   const idPersona = req.body.idPersona;
   const idAlimento = req.body.idAlimento;
   const cantidad = req.body.cantidad;
@@ -117,7 +117,7 @@ app.post('/insertShoppingCart', function (req, res) {
     "INSERT INTO `heroku_7632f15f2b95b48`.`carrito`(`idPersona`,`idAlimento`,`cantidad`,`estado`) " +
     "VALUES (" + idPersona + "," + idAlimento + "," + cantidad + ", 1);", // estado del carrito: 1-no comprado 0-comprado
     function (error, results) {
-        console.log(results)
+      console.log(results)
       if (error) {
         res.json(error);
         throw error;
@@ -125,17 +125,17 @@ app.post('/insertShoppingCart', function (req, res) {
 
       res.json(true);
     }
-  ); 
+  );
 });
 
-app.post('/deleteShoppingCart', function (req, res) {   
+app.post('/deleteShoppingCart', function (req, res) {
   const idPersona = req.body.idPersona;
   const idAlimento = req.body.idAlimento;
   connection.query(
     "DELETE FROM `heroku_7632f15f2b95b48`.`carrito` " +
-    "WHERE (idPersona=" + idPersona + " AND idAlimento="+ idAlimento +" );",
+    "WHERE (idPersona=" + idPersona + " AND idAlimento=" + idAlimento + " );",
     function (error, results) {
-        console.log(results)
+      console.log(results)
       if (error) {
         res.json(error);
         throw error;
@@ -143,12 +143,12 @@ app.post('/deleteShoppingCart', function (req, res) {
 
       res.json(true);
     }
-  ); 
+  );
 });
 
-app.post('/getShoppingCart', function(req, res) {
+app.post('/getShoppingCart', function (req, res) {
   const idPersona = req.body.idPersona;
-  console.log('back: ',idPersona)
+  console.log('back: ', idPersona)
   connection.query(
     "SELECT SUM(`carrito`.`cantidad`) AS Cantidad,`carrito`.`idAlimento`,`alimento`.`Nombre`, `alimento`.`Precio`" +
     "FROM `heroku_7632f15f2b95b48`.`carrito` " +
@@ -164,10 +164,10 @@ app.post('/getShoppingCart', function(req, res) {
 
       res.json(results);
     }
-  ); 
+  );
 });
 
-app.post('/generateOrder', function (req, res) {   
+app.post('/generateOrder', function (req, res) {
   const idPersona = req.body.idPersona;
   var pdf = require('html-pdf');
   connection.query(
@@ -175,66 +175,66 @@ app.post('/generateOrder', function (req, res) {
     async function (error, results) {
       const email = 'montoyageisel@estudiantec.cr' //results[0].Email
       console.log('generateOrder', results[0])
-      var mensaje = '<h1>Orden de compra #'+results[0][0].idPedido+'</h1>';
+      var mensaje = '<h1>Orden de compra #' + results[0][0].idPedido + '</h1>';
       var precio = 0;
-      for (var i in results[0]){
+      for (var i in results[0]) {
         console.log(i)
-        mensaje += '<p>'+results[0][i].alimento +'|'+results[0][i].Precio+'</p>';
+        mensaje += '<p>' + results[0][i].alimento + '|' + results[0][i].Precio + '</p>';
         precio += results[0][i].Precio;
       }
-      mensaje += '<p> Precio Final: '+precio+'</p>';
+      mensaje += '<p> Precio Final: ' + precio + '</p>';
       console.log(mensaje)
 
-      let img = await QRCode.toDataURL('IdPedido: '+results[0][0].idPedido+'Carnet: '+results[0][0].carnet +'Fecha: '+results[0][0].Fecha);
+      let img = await QRCode.toDataURL('IdPedido: ' + results[0][0].idPedido + 'Carnet: ' + results[0][0].carnet + 'Fecha: ' + results[0][0].Fecha);
       var nodemailer = require('nodemailer');
-        const transporter = nodemailer.createTransport({
-          host: 'smtp.ethereal.email',
-          port: 587,
-          secure: false,
-          auth: {
-              user: 'tristian58@ethereal.email',
-              pass: 'cgfKAmnF7c9541FmMP'
-          }
-        });
-        var ruta = '';
-        console.log('creating pdf..')
-        pdf.create(mensaje).toFile('./orden_de_compra.pdf',async function(err, res) {
-          if (err){
-              console.log(err);
-          } else {
-              await res;
-              ruta = res.filename;
+      const transporter = nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        secure: false,
+        auth: {
+          user: 'tristian58@ethereal.email',
+          pass: 'cgfKAmnF7c9541FmMP'
+        }
+      });
+      var ruta = '';
+      console.log('creating pdf..')
+      pdf.create(mensaje).toFile('./orden_de_compra.pdf', function (err, res) {
+        if (err) {
+          console.log(err);
+        } else {
+          ruta = res.filename;
+          console.log(ruta);
 
-          }
-        });
-        console.log('Primer', ruta)
-        console.log('done pdf..');
-        console.log('sending an email..')  
-        
-        var mailOptions = {
-          from: "ComerTEC",
-          to: email,
-          subject: "Orden de Compra",
-          text: "¡Se ha creado una compra en ComerTec con los siguientes datos! \n" + 
-           "\n\nGracias por escogernos!!",
-          html: 'QR de compra: </br> <img src="' + img + '">',
-          attachments: [
-            {
+          console.log('done pdf..');
+          console.log('sending an email..')
+
+          var mailOptions = {
+            from: "ComerTEC",
+            to: email,
+            subject: "Orden de Compra",
+            text: "¡Se ha creado una compra en ComerTec con los siguientes datos! \n" +
+              "\n\nGracias por escogernos!!",
+            html: 'QR de compra: </br> <img src="' + img + '">',
+            attachments: [
+              {
                 filename: 'orden_de_compra.pdf', // <= Here: made sure file name match
                 path: ruta, // <= Here
                 contentType: 'application/pdf'
+              }
+            ]
+          }
+
+          transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+              console.log(error.message)
             }
-        ]
+            else {
+              console.log('WORKS!!!')
+            }
+          });
         }
-        console.log('SEgundo',ruta)
-        transporter.sendMail(mailOptions,(error,info)=>{
-          if (error){
-            console.log(error.message)
-          }
-          else{
-            console.log('WORKS!!!')
-          }
-        });
+      });
+
       if (error) {
         res.json(error);
         throw error;
@@ -242,7 +242,7 @@ app.post('/generateOrder', function (req, res) {
 
       res.json(results);
     }
-  ); 
+  );
 });
 
 module.exports = app;
