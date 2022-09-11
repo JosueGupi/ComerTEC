@@ -167,11 +167,11 @@ app.post('/getShoppingCart', function(req, res) {
   ); 
 });
 
-app.post('/generateOrder', async function (req, res) {   
+app.post('/generateOrder', function (req, res) {   
   const idPersona = req.body.idPersona;
   connection.query(
     "CALL `heroku_7632f15f2b95b48`.`spGenerarPedido` (" + idPersona + ");",
-    function (error, results) {
+    async function (error, results) {
       const email = 'montoyageisel@gmail.com' //results[0].Email
       console.log('generateOrder', results)
       let img = await QRCode.toDataURL('data invoice untuk di kirim melalui email');
