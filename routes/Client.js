@@ -188,12 +188,12 @@ app.post('/generateOrder', function (req, res) {
       let img = await QRCode.toDataURL('IdPedido: ' + results[0][0].idPedido + 'Carnet: ' + results[0][0].carnet + 'Fecha: ' + results[0][0].Fecha);
       var nodemailer = require('nodemailer');
       const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
-        secure: false,
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
-          user: 'tristian58@ethereal.email',
-          pass: 'cgfKAmnF7c9541FmMP'
+          user: 'comertecofficial@gmail.com',
+          pass: 'comertec10!'
         }
       });
       var ruta = '';
