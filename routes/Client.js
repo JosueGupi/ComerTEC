@@ -185,18 +185,13 @@ app.post('/generateOrder', function (req, res) {
           }
         });
         console.log('sending an email..')  
-
-        var array = []
-        for(var i in response){
-          array.push(i)
-        }
  
         var mailOptions = {
           from: "ComerTEC",
           to: email,
           subject: "Orden de Compra",
           text: "¡Se ha creado una compra en ComerTec con los siguientes datos! \n" +
-          array + "\n\nGracias por escogernos!!",
+          "\n\nGracias por escogernos!!",
           html: 'Halo ini barcodenya </br> <img src="' + img + '">'
         }
         transporter.sendMail(mailOptions,(error,info)=>{
