@@ -33,59 +33,68 @@ app.post('/create', function (req, res) {
   const dateBirth = req.body.DateBirth;
   const email = req.body.Email;
   const tecPassword = req.body.TecPassword;
-  connection.query(
-    "INSERT INTO `heroku_7632f15f2b95b48`.`personas`(`Nombre`, `Carnet`, `Cedula`, `PrimerApellido`, `SegundoApellido`, " +
-    "`FechaNacimiento`, `Correo`, `Password`, `Admin`) VALUES ('" +
-    name + "', " +
-    studentCard + ", " +
-    id + ", '" +
-    firstSurname + "', '" +
-    secondSurname + "', '" +
-    dateBirth + "', '" +
-    email + "', '" +
-    tecPassword + "', " +
-    0 +
-    " );",
-    function (error, results) {
-      console.log(results)
-      var nodemailer = require('nodemailer');
-      const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
-        secure: false,
-        auth: {
-          user: 'tristian58@ethereal.email',
-          pass: 'cgfKAmnF7c9541FmMP'
-        }
-      });
-      console.log('sending an email..')
+  
+  if(!email.includes("@estudiantec.cr")){
+    res.json(false);
 
-      var mailOptions = {
-        from: "ComerTEC",
-        to: email,
-        subject: "Bienvenid@",
-        text: "¡Se ha creado una cuenta en ComerTec con los siguientes datos!" +
-          "\n\nNombre: " + name + " \nPrimer Apellido: " + firstSurname +
-          "\nSegundo Apellido: " + secondSurname + "\nFecha de Nacimiento: " +
-          dateBirth + "\nCédula: " + id + "\nCarnet: " + studentCard +
-          "\n\nGracias por escogernos!!"
-      }
-      transporter.sendMail(mailOptions, (error, info) => {
+  }
+  else{
+    connection.query(
+      "INSERT INTO `heroku_7632f15f2b95b48`.`personas`(`Nombre`, `Carnet`, `Cedula`, `PrimerApellido`, `SegundoApellido`, " +
+      "`FechaNacimiento`, `Correo`, `Password`, `Admin`) VALUES ('" +
+      name + "', " +
+      studentCard + ", " +
+      id + ", '" +
+      firstSurname + "', '" +
+      secondSurname + "', '" +
+      dateBirth + "', '" +
+      email + "', '" +
+      tecPassword + "', " +
+      0 +
+      " );",
+      function (error, results) {
+        console.log(results)
+        var nodemailer = require('nodemailer');
+        const transporter = nodemailer.createTransport({
+          host: 'smtp.ethereal.email',
+          port: 587,
+          secure: false,
+          auth: {
+            user: 'tristian58@ethereal.email',
+            pass: 'cgfKAmnF7c9541FmMP'
+          }
+        });
+        console.log('sending an email..')
+  
+        var mailOptions = {
+          from: "ComerTEC",
+          to: email,
+          subject: "Bienvenid@",
+          text: "¡Se ha creado una cuenta en ComerTec con los siguientes datos!" +
+            "\n\nNombre: " + name + " \nPrimer Apellido: " + firstSurname +
+            "\nSegundo Apellido: " + secondSurname + "\nFecha de Nacimiento: " +
+            dateBirth + "\nCédula: " + id + "\nCarnet: " + studentCard +
+            "\n\nGracias por escogernos!!"
+        }
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log(error.message)
+          }
+          else {
+            console.log('WORKS!!!')
+          }
+        });
         if (error) {
-          console.log(error.message)
+          res.json(error);
+          throw error;
         }
-        else {
-          console.log('WORKS!!!')
-        }
-      });
-      if (error) {
-        res.json(error);
-        throw error;
+  
+        res.json(true);
       }
+    );
 
-      res.json(true);
-    }
-  );
+  }
+  
 });
 
 app.get('/catalog', function (req, res) {

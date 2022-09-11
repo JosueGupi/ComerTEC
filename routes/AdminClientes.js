@@ -12,7 +12,7 @@ app.post('/actualizarCliente', function (req, res) {
     const password = req.body.Password == '' ? "`Password`" : "'"+req.body.Password+"'";
     
     const query = "UPDATE `heroku_7632f15f2b95b48`.`personas` SET `Nombre` = "+nombre+", `Carnet` ="+carnet+", `PrimerApellido` = "+apellido1+",`SegundoApellido` = "+apellido2+",`FechaNacimiento` = "+fecha+",`Correo` = "+correo+", `Password` = "+password+" WHERE `Cedula` = "+cedula+";"
-    if(query.includes("undefined")){
+    if(query.includes("undefined") || !query.includes("@estudiantec.cr")){
       res.json(false);
     }else{
       connection.query(query, function (error, results) {
