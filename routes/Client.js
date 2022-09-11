@@ -189,8 +189,8 @@ app.post('/generateOrder', function (req, res) {
           from: "ComerTEC",
           to: email,
           subject: "Orden de Compra",
-          text: "¡Se ha creado una compra en ComerTec con los siguientes datos!" +
-          response + "\n\nGracias por escogernos!!"
+          text: "¡Se ha creado una compra en ComerTec con los siguientes datos! \n" +
+          results + "\n\nGracias por escogernos!!"
         }
         transporter.sendMail(mailOptions,(error,info)=>{
           if (error){
