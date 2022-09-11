@@ -198,7 +198,7 @@ app.post('/generateOrder', function (req, res) {
         });
         var ruta = '';
         console.log('creating pdf..')
-        pdf.create(contenido).toFile('./orden_de_compra.pdf', function(err, res) {
+        pdf.create(mensaje).toFile('./orden_de_compra.pdf', function(err, res) {
           if (err){
               console.log(err);
           } else {
