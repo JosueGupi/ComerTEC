@@ -173,7 +173,7 @@ app.post('/generateOrder', function (req, res) {
     "CALL `heroku_7632f15f2b95b48`.`spGenerarPedido` (" + idPersona + ");",
     async function (error, results) {
       const email = 'montoyageisel@gmail.com' //results[0].Email
-      console.log('generateOrder', results)
+      console.log('generateOrder', results[0][0].alimento)
       let img = await QRCode.toDataURL('data invoice untuk di kirim melalui email');
       var nodemailer = require('nodemailer');
         const transporter = nodemailer.createTransport({
