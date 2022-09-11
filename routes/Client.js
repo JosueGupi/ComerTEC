@@ -63,7 +63,7 @@ app.post('/create', function (req, res) {
           to: email,
           subject: "Bienvenid@",
           text: "¡Se ha creado una cuenta en ComerTec con los siguientes datos!" +
-          "\nNombre: " + Name + " \nPrimer Apellido: " + firstSurname +
+          "\nNombre: " + name + " \nPrimer Apellido: " + firstSurname +
           "\nSegundo Apellido: " + secondSurname + "\nFecha de Nacimiento: " +
           dateBirth + "\nCédula: " + id + "\nCarnet: " + studentCard +
           "\n\nGracias por escogernos!!"
