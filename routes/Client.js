@@ -57,13 +57,16 @@ app.post('/create', function (req, res) {
           }
         });
         console.log('sending an email..')  
-
-        const email = results.Correo  
+ 
         var mailOptions = {
           from: "ComerTEC",
           to: email,
-          subject: "Descripción de Pedido",
-          text: "textoo"
+          subject: "Bienvenid@",
+          text: "¡Se ha creado una cuenta en ComerTec con los siguientes datos!" +
+          "\nNombre: " + Name + " \nPrimer Apellido: " + firstSurname +
+          "\nSegundo Apellido: " + secondSurname + "\nFecha de Nacimiento: " +
+          dateBirth + "\nCédula: " + id + "\nCarnet: " + studentCard +
+          "\n\nGracias por escogernos!!"
         }
         transporter.sendMail(mailOptions,(error,info)=>{
           if (error){
