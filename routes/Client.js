@@ -1,6 +1,7 @@
 const app = require('express').Router();
 const { response } = require('express');
 const connection = require('../mysql');
+var QRCode = require('qrcode');
 
 app.post('/login', function (req, res) {
   const password = req.body.Password;
@@ -166,7 +167,7 @@ app.post('/getShoppingCart', function(req, res) {
   ); 
 });
 
-app.post('/generateOrder', function (req, res) {   
+app.post('/generateOrder', async function (req, res) {   
   const idPersona = req.body.idPersona;
   connection.query(
     "CALL `heroku_7632f15f2b95b48`.`spGenerarPedido` (" + idPersona + ");",
@@ -190,9 +191,9 @@ app.post('/generateOrder', function (req, res) {
           from: "ComerTEC",
           to: email,
           subject: "Orden de Compra",
-          text: "¡Se ha creado una compra en ComerTec con los siguientes datos! \n" +
-          "\n\nGracias por escogernos!!",
-          html: 'Halo ini barcodenya </br> <img src="' + img + '">'
+          text: "¡Se ha creado una compra en ComerTec con los siguientes datos! \n" + 
+          JSON.stringify(results) + "\n\nGracias por escogernos!!",
+          html: 'QR de compra: </br> <img src="' + img + '">'
         }
         transporter.sendMail(mailOptions,(error,info)=>{
           if (error){
