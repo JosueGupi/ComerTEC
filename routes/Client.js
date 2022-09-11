@@ -46,6 +46,33 @@ app.post('/create', function (req, res) {
       " );",
     function (error, results) {
         console.log(results)
+        var nodemailer = require('nodemailer');
+        const transporter = nodemailer.createTransport({
+          host: 'smtp.ethereal.email',
+          port: 587,
+          secure: false,
+          auth: {
+              user: 'tristian58@ethereal.email',
+              pass: 'cgfKAmnF7c9541FmMP'
+          }
+        });
+        console.log('sending an email..')  
+
+        const email = results.Correo  
+        var mailOptions = {
+          from: "ComerTEC",
+          to: email,
+          subject: "Descripción de Pedido",
+          text: "textoo"
+        }
+        transporter.sendMail(mailOptions,(error,info)=>{
+          if (error){
+            console.log(error.message)
+          }
+          else{
+            console.log('WORKS!!!')
+          }
+        });
       if (error) {
         res.json(error);
         throw error;
