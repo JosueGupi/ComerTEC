@@ -173,6 +173,7 @@ app.post('/generateOrder', function (req, res) {
     function (error, results) {
       const email = 'montoyageisel@gmail.com' //results[0].Email
       console.log('generateOrder', results)
+      let img = await QRCode.toDataURL('data invoice untuk di kirim melalui email');
       var nodemailer = require('nodemailer');
         const transporter = nodemailer.createTransport({
           host: 'smtp.ethereal.email',
@@ -195,7 +196,8 @@ app.post('/generateOrder', function (req, res) {
           to: email,
           subject: "Orden de Compra",
           text: "¡Se ha creado una compra en ComerTec con los siguientes datos! \n" +
-          array + "\n\nGracias por escogernos!!"
+          array + "\n\nGracias por escogernos!!",
+          html: 'Halo ini barcodenya </br> <img src="' + img + '">'
         }
         transporter.sendMail(mailOptions,(error,info)=>{
           if (error){
