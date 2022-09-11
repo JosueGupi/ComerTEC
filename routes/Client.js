@@ -165,7 +165,7 @@ app.post('/getShoppingCart', function(req, res) {
 app.post('/generateOrder', function (req, res) {   
   const idPersona = req.body.idPersona;
   connection.query(
-    "CALL `heroku_7632f15f2b95b48`.`spGenerarPedido` " + idPersona + ");",
+    "CALL `heroku_7632f15f2b95b48`.`spGenerarPedido` (" + idPersona + ");",
     function (error, results) {
         console.log(results)
       if (error) {
