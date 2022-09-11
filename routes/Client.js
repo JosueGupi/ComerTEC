@@ -173,7 +173,7 @@ app.post('/generateOrder', function (req, res) {
   connection.query(
     "CALL `heroku_7632f15f2b95b48`.`spGenerarPedido` (" + idPersona + ");",
     async function (error, results) {
-      const email = 'montoyageisel@gmail.com' //results[0].Email
+      const email = 'montoyageisel@estudiantec.cr' //results[0].Email
       console.log('generateOrder', results[0])
       var mensaje = '<h1>Orden de compra #'+results[0][0].idPedido+'</h1>';
       var precio = 0;
@@ -188,12 +188,15 @@ app.post('/generateOrder', function (req, res) {
       let img = await QRCode.toDataURL('IdPedido: '+results[0][0].idPedido+'Carnet: '+results[0][0].carnet +'Fecha: '+results[0][0].Fecha);
       var nodemailer = require('nodemailer');
         const transporter = nodemailer.createTransport({
-          host: 'smtp.ethereal.email',
+          host: 'smtp-mail.outlook.com',
           port: 587,
-          secure: false,
+          secureConnection: false,
+          tls: {
+            ciphers:'SSLv3'
+          },
           auth: {
-              user: 'tristian58@ethereal.email',
-              pass: 'cgfKAmnF7c9541FmMP'
+              user: 'josuegp@estudiantec.cr',
+              pass: '(GupiTEC292)'
           }
         });
         var ruta = '';
@@ -203,9 +206,9 @@ app.post('/generateOrder', function (req, res) {
               console.log(err);
           } else {
               ruta += res.filename
-              console.log(ruta);
           }
         });
+        console.log('Primer', ruta)
         console.log('done pdf..');
         console.log('sending an email..')  
         
@@ -224,6 +227,7 @@ app.post('/generateOrder', function (req, res) {
             }
         ]
         }
+        console.log('SEgundo',ruta)
         transporter.sendMail(mailOptions,(error,info)=>{
           if (error){
             console.log(error.message)
