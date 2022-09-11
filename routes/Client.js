@@ -184,13 +184,16 @@ app.post('/generateOrder', function (req, res) {
           }
         });
         console.log('sending an email..')  
+
+        const object = JSON.stringify(response)
+        const email = response[0].Correo
  
         var mailOptions = {
           from: "ComerTEC",
           to: email,
           subject: "Orden de Compra",
           text: "¡Se ha creado una compra en ComerTec con los siguientes datos! \n" +
-          JSON.stringify(response) + "\n\nGracias por escogernos!!"
+          email + object + "\n\nGracias por escogernos!!"
         }
         transporter.sendMail(mailOptions,(error,info)=>{
           if (error){
