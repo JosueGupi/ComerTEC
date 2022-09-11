@@ -188,24 +188,23 @@ app.post('/generateOrder', function (req, res) {
       let img = await QRCode.toDataURL('IdPedido: '+results[0][0].idPedido+'Carnet: '+results[0][0].carnet +'Fecha: '+results[0][0].Fecha);
       var nodemailer = require('nodemailer');
         const transporter = nodemailer.createTransport({
-          host: 'smtp-mail.outlook.com',
+          host: 'smtp.ethereal.email',
           port: 587,
-          secureConnection: false,
-          tls: {
-            ciphers:'SSLv3'
-          },
+          secure: false,
           auth: {
-              user: 'josuegp@estudiantec.cr',
-              pass: '(GupiTEC292)'
+              user: 'tristian58@ethereal.email',
+              pass: 'cgfKAmnF7c9541FmMP'
           }
         });
         var ruta = '';
         console.log('creating pdf..')
-        pdf.create(mensaje).toFile('./orden_de_compra.pdf', function(err, res) {
+        pdf.create(mensaje).toFile('./orden_de_compra.pdf',async function(err, res) {
           if (err){
               console.log(err);
           } else {
-              ruta += res.filename
+              await res;
+              ruta = res.filename;
+
           }
         });
         console.log('Primer', ruta)
