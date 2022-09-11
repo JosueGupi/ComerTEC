@@ -185,7 +185,7 @@ app.post('/generateOrder', function (req, res) {
       mensaje += '<p> Precio Final: ' + precio + '</p>';
       console.log(mensaje)
 
-      let img = await QRCode.toDataURL('IdPedido: ' + results[0][0].idPedido + 'Carnet: ' + results[0][0].carnet + 'Fecha: ' + results[0][0].Fecha);
+      let img = await QRCode.toDataURL('IdPedido: ' + results[0][0].idPedido + ' Carnet: ' + results[0][0].carnet + ' Fecha: ' + results[0][0].Fecha);
       var nodemailer = require('nodemailer');
       const transporter = nodemailer.createTransport({
         host: 'smtp.ethereal.email',
