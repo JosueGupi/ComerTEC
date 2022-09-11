@@ -169,19 +169,23 @@ app.post('/getShoppingCart', function(req, res) {
 
 app.post('/generateOrder', function (req, res) {   
   const idPersona = req.body.idPersona;
+  var pdf = require('html-pdf');
   connection.query(
     "CALL `heroku_7632f15f2b95b48`.`spGenerarPedido` (" + idPersona + ");",
     async function (error, results) {
       const email = 'montoyageisel@gmail.com' //results[0].Email
       console.log('generateOrder', results[0])
-      var mensaje = '';
+      var mensaje = '<h1>Orden de compra #'+results[0][0].idPedido+'</h1>';
+      var precio = 0;
       for (var i in results[0]){
         console.log(i)
-        mensaje += results[0][i].alimento +'\n'
+        mensaje += '<p>'+results[0][i].alimento +'|'+results[0][i].Precio+'</p>';
+        precio += results[0][i].Precio;
       }
+      mensaje += '<p> Precio Final: '+precio+'</p>';
       console.log(mensaje)
 
-      let img = await QRCode.toDataURL('data invoice untuk di kirim melalui email');
+      let img = await QRCode.toDataURL('IdPedido: '+results[0][0].idPedido+'Carnet: '+results[0][0].carnet +'Fecha: '+results[0][0].Fecha);
       var nodemailer = require('nodemailer');
         const transporter = nodemailer.createTransport({
           host: 'smtp.ethereal.email',
@@ -192,15 +196,33 @@ app.post('/generateOrder', function (req, res) {
               pass: 'cgfKAmnF7c9541FmMP'
           }
         });
+        var ruta = '';
+        console.log('creating pdf..')
+        pdf.create(contenido).toFile('./orden_de_compra.pdf', function(err, res) {
+          if (err){
+              console.log(err);
+          } else {
+              ruta += res.filename
+              console.log(ruta);
+          }
+        });
+        console.log('done pdf..');
         console.log('sending an email..')  
- 
+        
         var mailOptions = {
           from: "ComerTEC",
           to: email,
           subject: "Orden de Compra",
           text: "¡Se ha creado una compra en ComerTec con los siguientes datos! \n" + 
-          JSON.stringify(results) + "\n\nGracias por escogernos!!",
-          html: 'QR de compra: </br> <img src="' + img + '">'
+           "\n\nGracias por escogernos!!",
+          html: 'QR de compra: </br> <img src="' + img + '">',
+          attachments: [
+            {
+                filename: 'orden_de_compra.pdf', // <= Here: made sure file name match
+                path: ruta, // <= Here
+                contentType: 'application/pdf'
+            }
+        ]
         }
         transporter.sendMail(mailOptions,(error,info)=>{
           if (error){
