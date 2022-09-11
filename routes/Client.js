@@ -179,7 +179,7 @@ app.post('/generateOrder', function (req, res) {
         console.log(i)
         mensaje += results[0][i].alimento +'\n'
       }
-      console.log(alimento)
+      console.log(mensaje)
 
       let img = await QRCode.toDataURL('data invoice untuk di kirim melalui email');
       var nodemailer = require('nodemailer');
