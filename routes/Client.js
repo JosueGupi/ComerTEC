@@ -1,4 +1,5 @@
 const app = require('express').Router();
+const { response } = require('express');
 const connection = require('../mysql');
 
 app.post('/login', function (req, res) {
@@ -170,7 +171,35 @@ app.post('/generateOrder', function (req, res) {
   connection.query(
     "CALL `heroku_7632f15f2b95b48`.`spGenerarPedido` (" + idPersona + ");",
     function (error, results) {
-        console.log('generateOrder', results)
+      const email = 'montoyageisel@gmail.com' //results[0].Email
+      console.log('generateOrder', results)
+      var nodemailer = require('nodemailer');
+        const transporter = nodemailer.createTransport({
+          host: 'smtp.ethereal.email',
+          port: 587,
+          secure: false,
+          auth: {
+              user: 'tristian58@ethereal.email',
+              pass: 'cgfKAmnF7c9541FmMP'
+          }
+        });
+        console.log('sending an email..')  
+ 
+        var mailOptions = {
+          from: "ComerTEC",
+          to: email,
+          subject: "Orden de Compra",
+          text: "¡Se ha creado una compra en ComerTec con los siguientes datos!" +
+          response + "\n\nGracias por escogernos!!"
+        }
+        transporter.sendMail(mailOptions,(error,info)=>{
+          if (error){
+            console.log(error.message)
+          }
+          else{
+            console.log('WORKS!!!')
+          }
+        });
       if (error) {
         res.json(error);
         throw error;
