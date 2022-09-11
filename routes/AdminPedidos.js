@@ -81,7 +81,7 @@ app.post('/eliminarAlimentoPedido', function (req, res) {
   }
      
   
-  // query to the dataase and get the record
+  // query t the dataase and get the record
 });
 app.post('/agregarAlimentoPedido', function (req, res) {
     
