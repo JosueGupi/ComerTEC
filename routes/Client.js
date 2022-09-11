@@ -63,7 +63,7 @@ app.post('/create', function (req, res) {
           to: email,
           subject: "Bienvenid@",
           text: "¡Se ha creado una cuenta en ComerTec con los siguientes datos!" +
-          "\nNombre: " + name + " \nPrimer Apellido: " + firstSurname +
+          "\n\nNombre: " + name + " \nPrimer Apellido: " + firstSurname +
           "\nSegundo Apellido: " + secondSurname + "\nFecha de Nacimiento: " +
           dateBirth + "\nCédula: " + id + "\nCarnet: " + studentCard +
           "\n\nGracias por escogernos!!"
@@ -170,7 +170,7 @@ app.post('/generateOrder', function (req, res) {
   connection.query(
     "CALL `heroku_7632f15f2b95b48`.`spGenerarPedido` (" + idPersona + ");",
     function (error, results) {
-        console.log(results)
+        console.log('generateOrder', results)
       if (error) {
         res.json(error);
         throw error;
