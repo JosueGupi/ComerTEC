@@ -239,13 +239,17 @@ app.post("/generateOrder", function (req, res) {
             results[0][0].Fecha
         );
         var nodemailer = require("nodemailer");
-        const transporter = nodemailer.createTransport({
-          host: "smtp.ethereal.email",
+        const transporter = nodemailer.createTransport("SMTP",{
+          host: "smtp-mail.outlook.com",
           port: 587,
+          tls: {
+            ciphers:'SSLv3'
+          },
           secure: false,
+          secureConnection: false,
           auth: {
-            user: "tristian58@ethereal.email",
-            pass: "cgfKAmnF7c9541FmMP",
+            user: "comertecofficial@outlook.com",
+            pass: "Comertec10!",
           },
         });
         var ruta = "";
@@ -269,7 +273,7 @@ app.post("/generateOrder", function (req, res) {
                 text:
                   "¡Se ha creado una compra en ComerTec con los siguientes datos! \n" +
                   "\n\nGracias por escogernos!!",
-                html: 'QR de compra: </br> <img src="' + img + '">',
+                html: 'QR de compra: <html><body></br> <img src="' + img + '"></body></html>',
                 attachments: [
                   {
                     filename: "orden_de_compra.pdf", // <= Here: made sure file name match
