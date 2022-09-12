@@ -182,7 +182,7 @@ app.post('/generateOrder', function (req, res) {
   connection.query(
     "CALL `heroku_7632f15f2b95b48`.`spGenerarPedido` (" + idPersona + ");",
     async function (error, results) {
-      const email = 'montoyageisel@estudiantec.cr' //results[0].Email
+      const email =  results[0][0].Correo;
       console.log('generateOrder', results[0])
       var mensaje = '<h1>Orden de compra #' + results[0][0].idPedido + '</h1>';
       var precio = 0;
