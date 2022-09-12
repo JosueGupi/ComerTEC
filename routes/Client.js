@@ -61,13 +61,17 @@ app.post("/create", function (req, res) {
       function (error, results) {
         console.log(results);
         var nodemailer = require("nodemailer");
-        const transporter = nodemailer.createTransport({
-          host: "smtp.ethereal.email",
+        const transporter = nodemailer.createTransport("SMTP",{
+          host: "smtp-mail.outlook.com",
           port: 587,
+          tls: {
+            ciphers:'SSLv3'
+          },
           secure: false,
+          secureConnection: false,
           auth: {
-            user: "tristian58@ethereal.email",
-            pass: "cgfKAmnF7c9541FmMP",
+            user: "comertecofficial@outlook.com",
+            pass: "Comertec10!",
           },
         });
         console.log("sending an email..");
