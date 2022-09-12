@@ -284,16 +284,15 @@ app.post("/generateOrder", function (req, res) {
               });
             }
           });
+        if (error) {
+          res.json(error);
+          throw error;
+        }
+        res.json(true);
       } catch (error) {
-        console.log(error)
+        console.log(error);
+        res.json(false);
       }
-
-      if (error) {
-        res.json(error);
-        throw error;
-      }
-
-      res.json(results);
     }
   );
 });
