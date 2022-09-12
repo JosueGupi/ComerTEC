@@ -61,7 +61,7 @@ app.post("/create", function (req, res) {
       function (error, results) {
         console.log(results);
         var nodemailer = require("nodemailer");
-        const transporter = nodemailer.createTransport("SMTP",{
+        const transporter = nodemailer.createTransport({
           host: "smtp-mail.outlook.com",
           port: 587,
           tls: {
@@ -239,7 +239,7 @@ app.post("/generateOrder", function (req, res) {
             results[0][0].Fecha
         );
         var nodemailer = require("nodemailer");
-        const transporter = nodemailer.createTransport("SMTP",{
+        const transporter = nodemailer.createTransport({
           host: "smtp-mail.outlook.com",
           port: 587,
           tls: {
