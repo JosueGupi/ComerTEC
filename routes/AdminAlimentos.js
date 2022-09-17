@@ -75,7 +75,7 @@ app.get('/obtenerAlimentos', function (req, res) {
     });
      
   
-  // query to the database and get the records
+  // query to the database nd get the records
 });
 
 app.post('/modificarTiempo', function (req, res) {
