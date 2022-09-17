@@ -147,7 +147,7 @@ app.post("/insertShoppingCart", function (req, res) {
       idAlimento +
       "," +
       cantidad +
-      ", 1);", // estado del carrito: 1-no comprado 0-comprado
+      ", 1);", // estado dl carrito: 1-no comprado 0-comprado
     function (error, results) {
       console.log(results);
       if (error) {
