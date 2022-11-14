@@ -82,7 +82,7 @@ app.post('/modificarTiempo', function (req, res) {
     
   const IdComida = req.body.IdAlimento == '' ? "undefined" : req.body.IdAlimento;
   
-  const tiempo = req.body.TiempoAlimento == '' ? "undefined" : req.body.IdAlimento;
+  const tiempo = req.body.TiempoAlimento == '' ? "undefined" : req.body.TiempoAlimento;
   
   const query = "UPDATE `heroku_7632f15f2b95b48`.`alimento` SET `IdTiempo` = "+tiempo+" WHERE `idAlimento` ="+IdComida;
   if(query.includes("undefined")){
