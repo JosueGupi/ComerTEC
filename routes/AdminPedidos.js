@@ -19,7 +19,7 @@ app.post('/eliminarPedido', function (req, res) {
   }
      
   
-  // query to the database and get the records
+  // query to the database and get the record
 });
 
 app.post('/alimentosNuevos', function (req, res) {
